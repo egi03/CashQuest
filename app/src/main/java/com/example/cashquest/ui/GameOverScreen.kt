@@ -69,7 +69,7 @@ fun GameButton(text: String, onClick: () -> Unit) {
         Text(text = text,
             color = MaterialTheme.colorScheme.onPrimary,
             fontWeight = FontWeight.Bold,
-            fontSize = 16.sp)
+            fontSize = 20.sp)
     }
 }
 
