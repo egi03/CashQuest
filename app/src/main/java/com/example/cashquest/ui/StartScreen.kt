@@ -46,9 +46,9 @@ fun StartScreen() {
                 Modifier.width(200.dp)
             )
             Text(
-                text = "Cash Quest",
-                fontSize = 64.sp,
-                lineHeight = 64.sp,
+                text = "CASH QUEST",
+                fontSize = 50.sp,
+                lineHeight = 50.sp,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.primary
             )

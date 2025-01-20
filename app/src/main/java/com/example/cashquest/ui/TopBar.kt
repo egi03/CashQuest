@@ -46,7 +46,7 @@ fun TabItem(label: String, isSelected: Boolean, onClick: () -> Unit) {
         modifier = Modifier
             .padding(8.dp)
             .background(
-                if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface,
+                if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.primaryContainer,
                 shape = RoundedCornerShape(16.dp)
             )
             .clickable { onClick() }
