@@ -16,9 +16,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.example.cashquest.Routes
 
 @Composable
-fun TopBar(activeScreen: String, onTabSelected: (String) -> Unit) {
+fun TopBar(activeScreen: String, navigation: NavController) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -29,13 +31,13 @@ fun TopBar(activeScreen: String, onTabSelected: (String) -> Unit) {
     ) {
         TabItem(
             label = "PLAY",
-            isSelected = activeScreen == "QUIZ",
-            onClick = { onTabSelected("QUIZ") }
+            isSelected = activeScreen == Routes.START_SCREEN,
+            onClick = { navigation.navigate(Routes.START_SCREEN) }
         )
         TabItem(
             label = "LEADERBOARD",
-            isSelected = activeScreen == "LEADERBOARD",
-            onClick = { onTabSelected("LEADERBOARD") }
+            isSelected = activeScreen == Routes.LEADERBOARD_SCREEN,
+            onClick = { navigation.navigate(Routes.LEADERBOARD_SCREEN) }
         )
     }
 }

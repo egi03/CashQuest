@@ -14,10 +14,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import com.example.cashquest.Routes
 import com.example.cashquest.ui.theme.CashQuestTheme
 
 @Composable
-fun GameOverScreen() {
+fun GameOverScreen(navigation: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -49,9 +52,9 @@ fun GameOverScreen() {
         }
 
         Column {
-            GameButton(text = "PLAY AGAIN") { /* PLAY AGAIN */ }
+            GameButton(text = "PLAY AGAIN") { navigation.navigate(Routes.QUESTION_SCREEN) }
             Spacer(modifier = Modifier.height(16.dp))
-            GameButton(text = "LEADERBOARD") { /* SHOW LEADERBOARD */ }
+            GameButton(text = "LEADERBOARD") { navigation.navigate(Routes.LEADERBOARD_SCREEN) }
         }
     }
 }
@@ -70,14 +73,5 @@ fun GameButton(text: String, onClick: () -> Unit) {
             color = MaterialTheme.colorScheme.onPrimary,
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp)
-    }
-}
-
-@Composable
-@Preview(uiMode = UI_MODE_NIGHT_YES, name = "DarkMode")
-@Preview(uiMode = UI_MODE_NIGHT_NO, name = "LightMode")
-fun PreviewGameOverScreen() {
-    CashQuestTheme {
-        GameOverScreen()
     }
 }

@@ -6,19 +6,20 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.navigation.NavController
+import com.example.cashquest.Routes
 import com.example.cashquest.ui.LeaderboardScreen
 import com.example.cashquest.ui.StartScreen
 import com.example.cashquest.ui.TopBar
 
 @Composable
-fun MainScreen() {
-    var activeScreen by remember { mutableStateOf("QUIZ") }
+fun MainScreen(navigation: NavController, activeScreen: String) {
 
     Column {
-        TopBar(activeScreen = activeScreen, onTabSelected = { activeScreen = it })
+        TopBar(activeScreen = activeScreen, navigation = navigation)
         when (activeScreen) {
-            "QUIZ" -> StartScreen()
-            "LEADERBOARD" -> LeaderboardScreen()
+            Routes.START_SCREEN -> StartScreen(navigation = navigation)
+            Routes.LEADERBOARD_SCREEN -> LeaderboardScreen()
         }
     }
 }

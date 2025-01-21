@@ -31,13 +31,36 @@ import com.example.cashquest.ui.theme.CashQuestTheme
 
 data class LeaderboardEntry(val username: String, val amount: String)
 
+
+val sampleLeaderboard = listOf(
+    LeaderboardEntry("Alice", "$5,000"),
+    LeaderboardEntry("Bob", "$4,500"),
+    LeaderboardEntry("Charlie", "$4,000"),
+    LeaderboardEntry("David", "$3,500"),
+    LeaderboardEntry("Eve", "$3,000"),
+    LeaderboardEntry("Frank", "$2,500"),
+    LeaderboardEntry("Alice", "$5,000"),
+    LeaderboardEntry("Bob", "$4,500"),
+    LeaderboardEntry("Charlie", "$4,000"),
+    LeaderboardEntry("David", "$3,500"),
+    LeaderboardEntry("Eve", "$3,000"),
+    LeaderboardEntry("Frank", "$2,500"),
+    LeaderboardEntry("Grace", "$2,000")
+)
+
+
 @Composable
 fun LeaderboardScreen() {
+
+    val sortedLeaderboard = sampleLeaderboard.sortedByDescending { entry ->
+        entry.amount.replace("$", "").replace(",", "").toInt()
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.primaryContainer)
-            .padding(16.dp), // Added padding for spacing
+            .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(

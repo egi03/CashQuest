@@ -7,6 +7,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.rememberNavController
 import com.example.cashquest.ui.theme.CashQuestTheme
 import com.example.cashquest.ui.theme.MainScreen
 
@@ -15,24 +17,26 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             CashQuestTheme {
-                MainScreen()
+                NavigationController()
             }
         }
     }
 }
 
 
-@Preview(
-    uiMode = UI_MODE_NIGHT_YES,
-    name = "DefaultPreviewDark"
-)
-@Preview(
-    uiMode = UI_MODE_NIGHT_NO,
-    name = "DefaultPreviewLight"
-)
-@Composable
-fun PreviewQuizScreen() {
-    CashQuestTheme {
-        MainScreen()
-    }
-}
+
+
+//@Preview(
+//    uiMode = UI_MODE_NIGHT_YES,
+//    name = "DefaultPreviewDark"
+//)
+//@Preview(
+//    uiMode = UI_MODE_NIGHT_NO,
+//    name = "DefaultPreviewLight"
+//)
+//@Composable
+//fun PreviewQuizScreen() {
+//    CashQuestTheme {
+//        MainScreen(navigation = NavigationController())
+//    }
+//}

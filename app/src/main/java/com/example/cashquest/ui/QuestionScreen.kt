@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.sp
 import com.example.cashquest.ui.theme.CashQuestTheme
 
 @Composable
-fun QuizScreen() {
+fun QuestionScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -96,6 +96,6 @@ fun AnswerButton(text: String) {
 )
 fun PreviewWuizScreen(){
     CashQuestTheme {
-        QuizScreen()
+        QuestionScreen()
     }
 }
