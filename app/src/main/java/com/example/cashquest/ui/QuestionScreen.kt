@@ -18,16 +18,25 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.cashquest.data.Answer
+import com.example.cashquest.data.CashQuestViewModel
+import com.example.cashquest.data.Question
 import com.example.cashquest.ui.theme.CashQuestTheme
 
 @Composable
-fun QuestionScreen() {
+fun QuestionScreen(viewModel: CashQuestViewModel) {
+
+    val questions = viewModel.questionsData
+
+    val randomQuestion = remember(questions) { questions.random() }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -43,7 +52,7 @@ fun QuestionScreen() {
         )
 
         Text(
-            text = "Question texttexttexttexttexttexttexttexttexttexttexttext?",
+            text = randomQuestion.question_text,
             color = MaterialTheme.colorScheme.primary,
             fontWeight = FontWeight.Medium,
             lineHeight = 50.sp,
@@ -55,13 +64,13 @@ fun QuestionScreen() {
 
         Column(modifier = Modifier.padding(16.dp)) {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
-                AnswerButton(text = "Answer A")
-                AnswerButton(text = "Answer B")
+                AnswerButton(text = randomQuestion.answers[0].answer_text)
+                AnswerButton(text = randomQuestion.answers[1].answer_text)
             }
             Spacer(modifier = Modifier.height(16.dp))
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
-                AnswerButton(text = "Answer C")
-                AnswerButton(text = "Answer D")
+                AnswerButton(text = randomQuestion.answers[2].answer_text)
+                AnswerButton(text = randomQuestion.answers[3].answer_text)
             }
         }
     }
@@ -82,20 +91,5 @@ fun AnswerButton(text: String) {
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp
         )
-    }
-}
-
-@Composable
-@Preview(
-    uiMode = UI_MODE_NIGHT_YES,
-    name = "DefaultPreviewDark"
-)
-@Preview(
-    uiMode = UI_MODE_NIGHT_NO,
-    name = "DefaultPreviewLight"
-)
-fun PreviewWuizScreen(){
-    CashQuestTheme {
-        QuestionScreen()
     }
 }

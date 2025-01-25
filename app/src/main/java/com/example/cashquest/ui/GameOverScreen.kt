@@ -17,10 +17,11 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.cashquest.Routes
+import com.example.cashquest.data.CashQuestViewModel
 import com.example.cashquest.ui.theme.CashQuestTheme
 
 @Composable
-fun GameOverScreen(navigation: NavController) {
+fun GameOverScreen(viewModel: CashQuestViewModel,navigation: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()

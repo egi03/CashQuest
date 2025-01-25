@@ -1,23 +1,20 @@
 package com.example.cashquest
 
-import android.content.res.Configuration.UI_MODE_NIGHT_NO
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.compose.rememberNavController
+import androidx.activity.viewModels
+import com.example.cashquest.data.CashQuestViewModel
 import com.example.cashquest.ui.theme.CashQuestTheme
-import com.example.cashquest.ui.theme.MainScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val viewModel by viewModels<CashQuestViewModel>()
+
         setContent {
             CashQuestTheme {
-                NavigationController()
+                NavigationController(viewModel)
             }
         }
     }

@@ -8,12 +8,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.navigation.NavController
 import com.example.cashquest.Routes
+import com.example.cashquest.data.CashQuestViewModel
 import com.example.cashquest.ui.LeaderboardScreen
 import com.example.cashquest.ui.StartScreen
 import com.example.cashquest.ui.TopBar
 
 @Composable
-fun MainScreen(navigation: NavController, activeScreen: String) {
+fun MainScreen(viewModel: CashQuestViewModel,navigation: NavController, activeScreen: String) {
 
     Column {
         TopBar(activeScreen = activeScreen, navigation = navigation)
