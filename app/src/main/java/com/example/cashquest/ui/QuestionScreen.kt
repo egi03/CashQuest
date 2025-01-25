@@ -22,6 +22,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -54,9 +55,10 @@ fun QuestionScreen(viewModel: CashQuestViewModel) {
         Text(
             text = randomQuestion.question_text,
             color = MaterialTheme.colorScheme.primary,
+            textAlign = TextAlign.Center,
             fontWeight = FontWeight.Medium,
-            lineHeight = 50.sp,
-            fontSize = 40.sp,
+            lineHeight = 40.sp,
+            fontSize = 30.sp,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp)
@@ -83,13 +85,13 @@ fun AnswerButton(text: String) {
         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.onSurface),
         shape = RoundedCornerShape(50),
         modifier = Modifier
-            .size(150.dp, 70.dp)
+            .size(180.dp, 80.dp)
     ) {
         Text(
             text = text,
             color = MaterialTheme.colorScheme.onPrimary,
             fontWeight = FontWeight.Bold,
-            fontSize = 20.sp
+            fontSize = 19.sp
         )
     }
 }
