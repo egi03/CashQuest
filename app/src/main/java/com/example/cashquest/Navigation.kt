@@ -12,8 +12,10 @@ import com.example.cashquest.ui.theme.MainScreen
 object Routes {
     const val START_SCREEN = "startScreen"
     const val LEADERBOARD_SCREEN = "leaderboardScreen"
-    const val QUESTION_SCREEN = "questionScreen"
+    const val QUESTION_SCREEN = "questionScreen/{difficulty}"
     const val GAME_OVER_SCREEN = "gameOverScreen"
+
+    fun questionScreenRoute(difficulty: Int) = "questionScreen/$difficulty"
 }
 
 @Composable
@@ -29,8 +31,9 @@ fun NavigationController(
         composable(Routes.LEADERBOARD_SCREEN) {
             MainScreen(viewModel=viewModel, navigation = navController, activeScreen = Routes.LEADERBOARD_SCREEN)
         }
-        composable(Routes.QUESTION_SCREEN) {
-            QuestionScreen(viewModel)
+        composable(Routes.QUESTION_SCREEN) { backStackEntry ->
+            val difficulty = backStackEntry.arguments?.getString("difficulty")?.toIntOrNull() ?: 0
+            QuestionScreen(viewModel = viewModel, navigation = navController, difficulty = difficulty)
         }
         composable(Routes.GAME_OVER_SCREEN) {
             GameOverScreen(viewModel=viewModel, navigation = navController)

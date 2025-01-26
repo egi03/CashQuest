@@ -1,27 +1,35 @@
 package com.example.cashquest.ui
 
-import android.content.res.Configuration.UI_MODE_NIGHT_NO
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import com.example.cashquest.Routes
 import com.example.cashquest.data.CashQuestViewModel
-import com.example.cashquest.ui.theme.CashQuestTheme
 
 @Composable
-fun GameOverScreen(viewModel: CashQuestViewModel,navigation: NavController) {
+fun GameOverScreen(
+    viewModel: CashQuestViewModel,
+    navigation: NavController) {
+
+    val questionsAnswered = viewModel.currentAmount / 100
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -29,23 +37,26 @@ fun GameOverScreen(viewModel: CashQuestViewModel,navigation: NavController) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly
     ) {
-        Text(
-            text = "GAME OVER",
-            color = MaterialTheme.colorScheme.primaryContainer,
-            fontWeight = FontWeight.Bold,
-            fontSize = 24.sp
-        )
 
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
-                text = "You won",
+                text = "Rezultat: ${questionsAnswered}/10",
+                color = MaterialTheme.colorScheme.primary,
+                fontWeight = FontWeight.Bold,
+                fontSize = 35.sp,
+                lineHeight = 50.sp
+            )
+            Spacer(modifier = Modifier.height(36.dp))
+
+            Text(
+                text = "Osvojili ste",
                 color = MaterialTheme.colorScheme.primary,
                 fontWeight = FontWeight.Bold,
                 fontSize = 65.sp
             )
 
             Text(
-                text = "10,000€",
+                text = viewModel.currentAmount.toString() + " €",
                 color = Color(0xFF33A063),
                 fontWeight = FontWeight.Bold,
                 fontSize = 90.sp
@@ -53,9 +64,9 @@ fun GameOverScreen(viewModel: CashQuestViewModel,navigation: NavController) {
         }
 
         Column {
-            GameButton(text = "PLAY AGAIN") { navigation.navigate(Routes.QUESTION_SCREEN) }
+            GameButton(text = "IGRAJ PONOVO") { navigation.navigate(Routes.questionScreenRoute(0)) }
             Spacer(modifier = Modifier.height(16.dp))
-            GameButton(text = "LEADERBOARD") { navigation.navigate(Routes.LEADERBOARD_SCREEN) }
+            GameButton(text = "RANG LISTA") { navigation.navigate(Routes.LEADERBOARD_SCREEN) }
         }
     }
 }
@@ -64,7 +75,7 @@ fun GameOverScreen(viewModel: CashQuestViewModel,navigation: NavController) {
 fun GameButton(text: String, onClick: () -> Unit) {
     Button(
         onClick = onClick,
-        colors = ButtonDefaults.buttonColors(containerColor =  MaterialTheme.colorScheme.onSurface), // Greyish button
+        colors = ButtonDefaults.buttonColors(containerColor =  MaterialTheme.colorScheme.onSurface),
         shape = RoundedCornerShape(20.dp),
         modifier = Modifier
             .width(200.dp)

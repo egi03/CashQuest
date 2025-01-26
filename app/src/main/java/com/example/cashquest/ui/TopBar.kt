@@ -30,12 +30,12 @@ fun TopBar(activeScreen: String, navigation: NavController) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         TabItem(
-            label = "PLAY",
+            label = "IGRAJ",
             isSelected = activeScreen == Routes.START_SCREEN,
             onClick = { navigation.navigate(Routes.START_SCREEN) }
         )
         TabItem(
-            label = "LEADERBOARD",
+            label = "RANG LISTA",
             isSelected = activeScreen == Routes.LEADERBOARD_SCREEN,
             onClick = { navigation.navigate(Routes.LEADERBOARD_SCREEN) }
         )

@@ -4,9 +4,7 @@ import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,40 +19,25 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.cashquest.data.CashQuestViewModel
+import com.example.cashquest.data.User
 import com.example.cashquest.ui.theme.CashQuestTheme
 
 
-data class LeaderboardEntry(val username: String, val amount: String)
-
-
-val sampleLeaderboard = listOf(
-    LeaderboardEntry("Alice", "$5,000"),
-    LeaderboardEntry("Bob", "$4,500"),
-    LeaderboardEntry("Charlie", "$4,000"),
-    LeaderboardEntry("David", "$3,500"),
-    LeaderboardEntry("Eve", "$3,000"),
-    LeaderboardEntry("Frank", "$2,500"),
-    LeaderboardEntry("Alice", "$5,000"),
-    LeaderboardEntry("Bob", "$4,500"),
-    LeaderboardEntry("Charlie", "$4,000"),
-    LeaderboardEntry("David", "$3,500"),
-    LeaderboardEntry("Eve", "$3,000"),
-    LeaderboardEntry("Frank", "$2,500"),
-    LeaderboardEntry("Grace", "$2,000")
-)
-
-
 @Composable
-fun LeaderboardScreen() {
+fun LeaderboardScreen(
+    viewModel: CashQuestViewModel
+) {
 
-    val sortedLeaderboard = sampleLeaderboard.sortedByDescending { entry ->
-        entry.amount.replace("$", "").replace(",", "").toInt()
-    }
+    var leaderboard = viewModel.leaderboardData
+
+    val sortedLeaderboard = leaderboard.sortedByDescending { it.amount }
 
     Column(
         modifier = Modifier
@@ -64,7 +47,7 @@ fun LeaderboardScreen() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "LEADERBOARD",
+            text = "RANG LISTA",
             fontSize = 45.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.primary,
@@ -87,37 +70,23 @@ fun LeaderboardScreen() {
 
 
 @Composable
-fun LeaderboardItem(entry: LeaderboardEntry) {
+fun LeaderboardItem(user: User) {
     Column(
         modifier = Modifier
             .width(300.dp)
+            .clip(RoundedCornerShape(20.dp))
             .background(MaterialTheme.colorScheme.onSurface)
             .padding(vertical = 8.dp, horizontal = 16.dp),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(text = entry.amount,
+        Text(text = user.amount.toString() + " €" ,
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             color = Color(0xFF276B45)
         )
-        Text(text = entry.username,
+        Text(text = user.name,
             fontSize = 24.sp,
             fontWeight = FontWeight.Medium,
             color = MaterialTheme.colorScheme.onPrimary)
-    }
-}
-
-@Composable
-@Preview(
-    uiMode = UI_MODE_NIGHT_YES,
-    name = "DefaultPreviewDark"
-)
-@Preview(
-    uiMode = UI_MODE_NIGHT_NO,
-    name = "DefaultPreviewLight"
-)
-fun PreviewLeaderboardScreen(){
-    CashQuestTheme {
-        LeaderboardScreen()
     }
 }

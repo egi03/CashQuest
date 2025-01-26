@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -30,14 +29,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.cashquest.R
 import com.example.cashquest.Routes
+import com.example.cashquest.data.CashQuestViewModel
 
 @Composable
-fun StartScreen(navigation: NavController) {
-    var username by remember { mutableStateOf("") }
-
+fun StartScreen(navigation: NavController, viewModel: CashQuestViewModel) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -61,15 +60,15 @@ fun StartScreen(navigation: NavController) {
             Spacer(modifier = Modifier.height(32.dp))
 
             TextField(
-                value = username,
-                onValueChange = { username = it },
+                value = viewModel.username,
+                onValueChange = { viewModel.username = it },
                 singleLine = true,
-                label = { Text(text = "Your name") },
+                label = { Text(text = "Vaše ime") },
                 keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
                 keyboardActions = KeyboardActions(
                     onDone = {
-                        if (username.isNotBlank()){
-                            navigation.navigate(Routes.QUESTION_SCREEN)
+                        if (viewModel.username.isNotBlank()){
+                            navigation.navigate(Routes.questionScreenRoute(0))
                         }
                     }
                 )
@@ -77,7 +76,11 @@ fun StartScreen(navigation: NavController) {
 
             Spacer(modifier = Modifier.height(32.dp))
             Button(
-                onClick = { navigation.navigate(Routes.QUESTION_SCREEN) },
+                onClick = {
+                    if (viewModel.username.isNotBlank()){
+                        navigation.navigate(Routes.questionScreenRoute(0))
+                    }
+                          },
                 modifier = Modifier
                     .height(56.dp)
                     .padding(horizontal = 32.dp),
@@ -87,7 +90,7 @@ fun StartScreen(navigation: NavController) {
                     contentColor = MaterialTheme.colorScheme.onPrimary
                 )
             ) {
-                Text(text = "Start Quiz", fontSize = 18.sp, fontWeight = FontWeight.Medium)
+                Text(text = "Pokreni kviz", fontSize = 18.sp, fontWeight = FontWeight.Medium)
             }
         }
     }
