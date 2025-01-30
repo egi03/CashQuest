@@ -62,7 +62,7 @@ fun QuestionScreen(
             else { navigation.navigate(Routes.questionScreenRoute(difficulty + 1)) }
         } else {
             navigation.navigate(Routes.GAME_OVER_SCREEN)
-            viewModel.addNewUser()
+            if (viewModel.currentAmount > 0) { viewModel.addNewUser() }
         }
     }
 
